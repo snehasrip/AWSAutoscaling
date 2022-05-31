@@ -10,7 +10,7 @@
       ip_address: "{{ ansible_facts['eth0']['ipv4']['address'] }}"
     tasks:
        - name: Run Apt Update
-         shell: apt update && apt install -y python3-apt
+         shell: apt update && apt install -y python3
 
        - name: Install Nginx Server
          apt: >
@@ -18,21 +18,21 @@
            state=present
        - name: Copy the files to index destination folder.
          template: >
-            src=/tmp/AWSAutoscaling/index.j2
+            src=./index.j2
             dest=/var/www/html/index.nginx-debian.html
             owner=root
             group=root
             mode=0644
        - name: Copy the style files to destination folder.
          copy: >
-            src=/tmp/AWSAutoscaling/style.css
+            src=./style.css
             dest=/var/www/html/style.css
             owner=root
             group=root
             mode=0644
        - name: Copy the javascript files to destination folder.
          copy: >
-            src=/tmp/AWSAutoscaling/scorekeeper.js
+            src=./scorekeeper.js
             dest=/var/www/html/scorekeeper.js
             owner=root
             group=root
